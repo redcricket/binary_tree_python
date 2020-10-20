@@ -124,6 +124,26 @@ class Tree:
                 queue.append(n.right)
             queue.pop(0)
 
+    def averageOfLevels(self, root: TreeNode) -> List[float]:
+        queue = []
+        result = []
+        if not root:
+            return result
+        sum = 0
+        queue.append(root)
+        while queue:
+            size = len(queue)
+            for i in range(0, size):
+               node = queue.pop(0) 
+	       sum += node.val 
+	       if node.left: 
+	           queue.append(node.left) 
+               if node.right: 
+                   queue.append(node.right)
+            result.append(sum / size)
+            sum = 0
+	return result
+
     def insert(self, value, level=0):
         if self.root == None:
             self.root = Node(value, level=level)
